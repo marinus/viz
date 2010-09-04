@@ -1,0 +1,26 @@
+VIZ for Splunk by Marinus van Aswegen (mvanaswegen AT gmail.com) v0.1 
+
+Creates a graph based on the relationship between two fields i.e. sourch, destination, protocol.
+It builds a graphviz dot file, which is then passed to graphviz for rendering.
+  
+BE WARNED no precations have been taken to prevent bad things from happening i.e. overwriting of sensitive files, etc
+  
+Usage
+
+*  | viz field1=x field2=y [lable=z] file=name [engine=dot|neato|twopi|circo|...] [seq=true|false] [flatten=true|false] [graphviz options]
+  
+  field1, field2 indicate the primary graphing nodes
+  label indicates the relationship, can be blank
+  file specifies where to write the graph to
+  engine allows you to select the graphviz rendering engine, defaults to dot if left blank
+  flatten will perform a unique on relationships between nodes, default false
+  seq will add a nr to each label as the data is parsed by splunk, useful to follow a seqence of events
+  you can add graphviz command directly on the search line i.e. rankdir=RL
+  
+ Examples
+ 
+ * | viz fiel1=from fiels2=to label=subject file=/tmp/maillog.png engine=circo seq=true ranksep=1.0
+ 
+ * | viz fiel1=ip1 fiels2=ip2 label=protocol file=/tmp/network.png flatten=true 
+ 
+ feedbak appreciated
